@@ -24,6 +24,8 @@ cc.Class({
         this.start_index = Math.random() * this.item_root.childrenCount  ;
         this.start_index = Math.floor(this.start_index);
         this.running_item.setPosition(this.item_root.children[this.start_index].getPosition());
+		// 隐藏奖品框
+		this.running_item.opacity = 0;
 
 
         //绑定label，后续来用打印抽奖结果
@@ -38,7 +40,8 @@ cc.Class({
     },
 
     update(dt) {
-        if(this.is_running === false){
+		// 没有设定奖品时不改变数值
+        if(this.is_running === false && this.prize){
             // 转圈结束后，再打印抽奖结果
             this.myLabel.string = (this.prize);
             return;
@@ -59,6 +62,8 @@ cc.Class({
     },
 
     on_start_click: function () {
+		// 显示奖品框
+		this.running_item.opacity = 255;
         this.end_index = Math.random() * this.item_root.childrenCount  ;
         this.end_index = Math.floor(this.end_index);
         console.log("end =" ,this.end_index +1);
